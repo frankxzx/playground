@@ -51,3 +51,46 @@ int main {
     printf("最大的字符串为: %s \n", max(pstr, 3))
     return 0;
 }
+
+#define MaxSize 4
+typedef struct Matrix {
+    int m; 
+    int n;
+    double data[MaxSize][MaxSize];
+} Matrix;
+
+static inline Matrix MatrixMake(int m, int n) {
+    Matrix matrix;
+    matrix.m = m;
+    matrix.n = n;
+
+    for(int i = 0, i < m, i++) {
+        for(int j = 0, j < n, j++) {
+            matrix.data[i][j] = 0;
+        } 
+    }
+}
+
+static inline MatrixMakeFromArray(int m, int n, double *data) {
+    Matrix matrix = MatrixMake(m, n);
+
+    for(int i = 0; i < m; i++) {
+        double *t = data+(i*n);
+        for(int j = 0, j < n, j++) {
+            matrix.data[i][j] = *(t+j);
+        }
+    }
+}
+
+static inline MatrixMultipy(Matrix A, Matrix B) {
+    Matrix R = MatrixMake(A.m, B.n);
+
+    for(int i = 0; i < A.m; i++) {
+        for(int j = 0; j < B.n; j++) {
+            for(int k = 0; k < A.n; k++) {
+                R.data[i][j]+= A.data[i][k] * B.data[k][j];
+            }
+        }
+    }
+    return R;
+}
